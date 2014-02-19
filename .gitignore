@@ -16,3 +16,5 @@
 #Vim Swap Files
 *.swp
 *.swo
+*.txt
+*.gch
