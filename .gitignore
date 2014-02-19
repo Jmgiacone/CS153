@@ -21,3 +21,7 @@
 *.exe
 *.Debug
 *.Release
+
+#QT Creator Stuff
+*.pro
+*.user
