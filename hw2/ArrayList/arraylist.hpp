@@ -1,3 +1,10 @@
+/*
+ * GIACONE, JORDAN	
+ * 2-19-14
+ * CS 153, Section C
+ * This is the templated ArrayList class
+ */
+
 template <typename T>
 ArrayList<T>::~ArrayList()
 {
@@ -11,26 +18,28 @@ ArrayList<T>::~ArrayList()
 template <typename T>
 ArrayList<T>& ArrayList<T>::operator = (const ArrayList<T>& rhs)
 {
-  delete [] m_data;
-  m_max = rhs.m_max;
-  m_size = rhs.m_size;
-  m_data = new T[m_max];
-
-  for(int i = 0; i < m_size; i++)
+  if(this != &rhs)
   {
-    m_data[i] = rhs.m_data[i];
-  }
+    delete [] m_data;
+    m_max = rhs.m_max;
+    m_size = rhs.m_size;
+    m_data = new T[m_max];
 
+    for(int i = 0; i < m_size; i++)
+    {
+      m_data[i] = rhs.m_data[i];
+    }
+  }
   return *this;
 }
 
 template <typename T>
 ArrayList<T>::ArrayList(const ArrayList<T>& cpy)
 {
-  m_data = NULL;
   m_max = 0;
   m_size = 0;
-
+  m_data = new T[1];
+   
   *this = cpy;
 }
 
@@ -45,7 +54,8 @@ const T& ArrayList<T>::first() const
 {
   if(m_size == 0)
   {
-    std::cout << "!-- Error : PANIC in ARRAYLIST!!.first()!! (List is empty)" << std::endl;
+    std::cout << "!-- Error : PANIC in ARRAYLIST!!.first()!!" 
+              << " (List is empty)" << std::endl;
     return m_errobj;
   }
 
@@ -68,7 +78,8 @@ T& ArrayList<T>::operator [] (int i)
 {
   if(m_size == 0 || (i < 0 || i >= m_size))
   {
-    std::cout << "!-- ERROR : PANIC in ARRAYLIST!!.[]()  (index out of bounds)" << std::endl;
+    std::cout << "!-- ERROR : PANIC in ARRAYLIST!!.[]()" 
+              << " (index out of bounds)" << std::endl;
     return m_errobj;
   }
 
@@ -95,7 +106,7 @@ void ArrayList<T>::clear()
   delete [] m_data;
   m_data = NULL;
   m_size = 0;
-  m_max =0;
+  m_max = 0;
 }
 
 template <typename T>
@@ -110,6 +121,7 @@ void ArrayList<T>::insert(const T& x, int i)
   if(m_data == NULL)
   {
     m_max = 2;
+    m_size = 0;
     m_data = new T[m_max];
   }
   if(i <= m_size && i >= 0)
@@ -134,13 +146,15 @@ void ArrayList<T>::insert(const T& x, int i)
         tmp[j] = m_data[j];
       }
 
-      delete m_data;
+      delete [] m_data;
       m_data = tmp;
+      tmp = NULL;
       insert(x, i);
     }
     return;
   }
-  std::cout << "!-- ERROR : PANIC in ARRAYLIST!!.insert()  (index out of bounds)" << std::endl;
+  std::cout << "!-- ERROR : PANIC in ARRAYLIST!!.insert()" 
+            << " (index out of bounds)" << std::endl;
 }
 
 template <typename T>
@@ -167,10 +181,12 @@ void ArrayList<T>::remove(int i)
 
       delete [] m_data;
       m_data = tmp;
+      tmp = NULL;
     }
     return;
   }
-  std::cout << "!-- ERROR : PANIC in ARRAYLIST!!.remove()  (index out of bounds)" << std::endl;
+  std::cout << "!-- ERROR : PANIC in ARRAYLIST!!.remove()" 
+            << " (index out of bounds)" << std::endl;
 }
 
 template <typename T>
@@ -183,7 +199,8 @@ void ArrayList<T>::swap(int i, int k)
     m_data[k] = tmp;
     return;
   }
-  std::cout << "!-- ERROR : PANIC in ARRAYLIST!!.swap()  (index out of bounds)" << std::endl;
+  std::cout << "!-- ERROR : PANIC in ARRAYLIST!!.swap()" 
+            << " (index out of bounds)" << std::endl;
 }
 
 template <typename T>
@@ -209,9 +226,10 @@ void ArrayList<T>::append(const ArrayList<T>& alist)
       {
         tmp[j] = m_data[j];
       }
-
-      delete m_data;
+ 
+      delete [] m_data;
       m_data = tmp;
+      tmp = NULL;
 
       append(alist);
     }
@@ -234,18 +252,4 @@ void ArrayList<T>::purge()
       }
     }
   }
-  /*T x;
-  ArrayList<T> duplicate = *this;
-  int index;
-  for(int i = 0; i < duplicate.m_size; i++)
-  {
-    x = duplicate.m_data[i];
-    index = duplicate.find(x);
-    //If that element has a duplicate
-    while(index != i && index != -1)
-    {
-      remove(index); 
-      index = find(x); 
-    }  
-  }*/
 }

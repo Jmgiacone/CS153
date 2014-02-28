@@ -178,7 +178,7 @@ template <typename T>
 std::ostream& operator<< (std::ostream& out, const ArrayList<T>& alist)
 {
   out << "[ ";
-  for (unsigned int i=0; i < alist.m_size; i++){
+  for (int i=0; i < alist.m_size; i++){
     out << alist.m_data[i] << ", ";
   }
   out << "]";
