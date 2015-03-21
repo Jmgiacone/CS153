@@ -28,3 +28,8 @@
 *.configs
 *.files
 *.includes
+*.config
+*.creator
+*.iml
+*.name
+*.xml
