@@ -276,20 +276,31 @@ void test05() {
 
 int main () {
   
-  cout << "Hello World!!, This is the LinkedList LARGE Tester" << endl; 
+  /*cout << "Hello World!!, This is the LinkedList LARGE Tester" << endl;
   
   test01();
   test02();
   test03();
   test04();
   test05();
-  
-/* Uncomment if you are using Dev-C++
-  cin.clear ();
-  cout << "Press Any Key to Continue" << endl;
-  cin.get();
-*/
+  cout << "LARGE Done!" << endl;*/
 
-  cout << "LARGE Done!" << endl;
+  LinkedList<int> x, y;
+  for(int i = 0; i < 1000; i++)
+  {
+    for(int j = 0; j < i + 1; j++)
+    {
+      x.insert_front(j);
+      y = x;
+
+      LinkedList<int> z(y);
+      cout << z << endl;
+    }
+
+    cout << x << "\n" << y << endl;
+    x.clear();
+    y.clear();
+  }
+
   return 0;
 }

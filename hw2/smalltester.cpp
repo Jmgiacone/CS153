@@ -19,7 +19,7 @@ int main () {
   start_grid.insert_back("Luigi");
   start_grid.insert_back("Toad");
   start_grid.insert_back("DonkeyKong");  
-  start_grid.insert_back("P.Peach");
+  start_grid.insert_back("Peach");
   start_grid.insert_back("Yoshi");
   
 
@@ -52,10 +52,10 @@ int main () {
   race.insert(s, 4);
   cout << race << endl << endl;
  
-  cout << "P.Peach retires with engine failure" << endl;
-  ix = race.find("P.Peach");
+  cout << "Peach retires with engine failure" << endl;
+  ix = race.find("Peach");
   race.remove(ix);
-  retired.insert_back("P.Peach");
+  retired.insert_back("Peach");
   cout << race << endl << endl;
   
   cout << "Koopa drops a banana" << endl;
